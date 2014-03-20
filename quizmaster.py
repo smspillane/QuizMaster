@@ -12,7 +12,12 @@ score = 1000
 name = ""
 
 def introduction():
-	print 'Welcome to the Untitled Game!  I am the Game Master!  Unlike other games, the aim in this game is to get your score to zero!  Currently, your score is ' + str(score) + '!\n'
+	print '*' * 71
+	print '*' + (' ' * 69) + '*' 
+	print '*' + (' ' * 29) + 'QUIZ MASTER' + (' ' * 29) + '*'
+	print '*' + (' ' * 69) + '*' 
+	print '*' * 71
+	print 'Welcome to the QUIZ MASTER!  I am the GAME MASTER!  Unlike other games, the aim in this game is to get your score to zero!  Currently, your score is ' + str(score) + '!\n'
 	name = raw_input("So player, what is your name?\n")
 	print "Welcome " + name + "!  Let's get started!\n"
 	print "You will have five rounds of games, and in each you will have opportunities to lower your points.  By the end of round four you will have had enough opportunity to lose a maximum of 1000 points, and if you have done so, you will move onto the final round!  Good luck!"
@@ -67,24 +72,36 @@ def roundtwo(name):
 	newround(3,name)
 
 def roundthree(name):
+	guess = ''
 	print 'Time to play Who Am I!\n'
 	print 'I am going to choose somebody well-known.  All you have to do is guess who it is.  One-by-one I will give you clues about this persons identity, and the more clues it takes, the less points you lose.  Got it?  Also, you have to spell it correctly!\n\n'
 	print 'Okay, let me think of somebody...\n\n\n GOT SOMEBODY!  \n\n\n'
 	for row in R3reader:
-		print 'Okay, I am thinking of somebody.\n'
-		guess = ''
-		for i in range(4):
-			i = 1
+		print("I am now thinking of somebody!  Let me think of the first clue...")
+		print("Okay, my first clue is: " + row[1])
+		guess = raw_input("Take your first guess!  Take care with spelling and capitalisations!\n")
+		if guess == row[0]:
+			print(row[6] + ' ' + name + '.' + '  That is correct!')
+		else:
+			print("Sorry, that was wrong!  \nOkay, my second clue is: " + row[2])
+			guess = raw_input("Take your second guess!  Take care with spelling and capitalisations!\n")
 			if guess == row[0]:
-				print "Correct!  That took you " + str(i) + ' clues and guesses!'
-				i = 5
-			elif i == 0:
-				print "The clue is: " + row[i] + " You can now have a guess!"
-				guess = raw_input("Who do you think I am?  Make sure you check spelling and capitalisation!\n")
-			elif i < 5:
-				print "Wrong!  Sorry! The next clue is: " + row[i] + " You can now have a guess!"
-				guess = raw_input("Who do you think I am?  Make sure you check spelling and capitalisation!\n")
+				print(row[6] + ' ' + name + '.' + '  That is correct!')
 			else:
-				print "Sorry, out of guesses!  It was " + row[0] + '.'
-
+				print("Sorry, that was wrong!  \nOkay, my third clue is: " + row[3])
+				guess = raw_input("Take your third guess!  Take care with spelling and capitalisations!\n")
+				if guess == row[0]:
+					print(row[6] + ' ' + name + '.' + '  That is correct!')
+				else:
+					print("Sorry, that was wrong!  \nOkay, my fourth clue is: " + row[4])
+					guess = raw_input("Take your third guess!  Take care with spelling and capitalisations!\n")
+					if guess == row[0]:
+						print(row[6] + ' ' + name + '.' + '  That is correct!')
+					else:
+						print("Sorry, that was wrong!  \nOkay, my fifth and final clue is: " + row[5])
+						guess = raw_input("Take your final guess!  Take care with spelling and capitalisations!\n")
+						if guess == row[0]:
+							print(row[6] + ' ' + name + '.' + '  That is correct!')
+						else:
+							print("Bad luck!  The answer was " + row[0] + '!')
 introduction()
