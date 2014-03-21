@@ -1,6 +1,8 @@
 import csv
 RoundOne = open('roundone.csv','rU')
 R1reader = csv.reader(RoundOne)
+titles = open('title.csv','rU')
+TitleFile = csv.reader(titles)
 RoundTwo = open('roundtwo.csv','rU')
 R2reader = csv.reader(RoundTwo)
 RoundThree = open('roundthree.csv','rU')
@@ -11,12 +13,11 @@ R3reader = csv.reader(RoundThree)
 score = 1000
 name = ""
 
+def title():
+	for row in TitleFile:
+		print(row[0])
+
 def introduction():
-	print '*' * 71
-	print '*' + (' ' * 69) + '*' 
-	print '*' + (' ' * 29) + 'QUIZ MASTER' + (' ' * 29) + '*'
-	print '*' + (' ' * 69) + '*' 
-	print '*' * 71
 	print 'Welcome to the QUIZ MASTER!  I am the GAME MASTER!  Unlike other games, the aim in this game is to get your score to zero!  Currently, your score is ' + str(score) + '!\n'
 	name = raw_input("So player, what is your name?\n")
 	print "Welcome " + name + "!  Let's get started!\n"
@@ -104,4 +105,5 @@ def roundthree(name):
 							print(row[6] + ' ' + name + '.' + '  That is correct!')
 						else:
 							print("Bad luck!  The answer was " + row[0] + '!')
+title()
 introduction()
