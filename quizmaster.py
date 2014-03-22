@@ -7,7 +7,9 @@ RoundTwo = open('roundtwo.csv','rU')
 R2reader = csv.reader(RoundTwo)
 RoundThree = open('roundthree.csv','rU')
 R3reader = csv.reader(RoundThree)
-#for row in R3reader:
+RoundFour = open('roundfour.csv','rU')
+R4reader = csv.reader(RoundFour)
+#for row in R4reader:
 #	print row
 
 score = 1000
@@ -36,6 +38,8 @@ def newround(x,name):
 		roundtwo(name)
 	elif x == 3:
 		roundthree(name)
+	elif x == 4:
+		roundfour(name)
 
 def roundone(name):
 	subtract = 0
@@ -105,5 +109,65 @@ def roundthree(name):
 							print(row[6] + ' ' + name + '.' + '  That is correct!')
 						else:
 							print("Bad luck!  The answer was " + row[0] + '!')
+	newround(4,name)
+
+def roundfour(name):
+	fiftyfifty = 1
+	questionskip = 1
+	percentage = 1
+	print("You have reached the penultimate round " + name + "!  Are you read for some multiple choice questions!  I am feeling generous so I am going to give you three life-lines!  However, once you use them, they are gone.")
+	for row in R4reader:
+		print("Question: " + row[0])
+		guess = raw_input("A. " + row[1] + "\nB. " + row[2] + "\nC. " + row[3] + "\nD. " + row[4] + "\nPlease type A, B, C, D, 50, %, or SKIP now.\n")
+		if guess == row[5]:
+			print "CORRECT!  Congratulations.  Time for the next question..."
+		elif guess == "SKIP":
+			if questionskip == 1:
+				print("You have used your question skip.  Using this life-line again will automatically result in a question pass.  Time for the next question!")
+				questionskip = 0
+			else:
+				print("You have used this life-line already!  You automatically forfeit this question.  Time for the next question...")
+		elif guess == str(50):
+			if fiftyfifty == 1:
+				fiftyfifty = 0
+				print("You have used your fifty-fifty.  If you use this again this result in an automatic forfeit of the question.")
+				print("Question: " + row[0])
+				if row[6] == row[1]:
+					print ("A. " + row[6])
+				if row[7] == row[2]:
+					print ("B. " + row[7])
+				if row[8] == row[3]:
+					print ("C. " + row[8])
+				if row[9] == row[4]:
+					print ("D. " + row[9])
+				guess = raw_input("Please type A, B, C, or D now.\n")
+				if guess == row[5]:
+					print "CORRECT!  Congratulations.  Time for the next question..."
+				else:
+					print "WRONG!  Time for your next question."
+			else:
+				print("You have used this life-line already!  You automatically forfeit this question.  Time for the next question...")
+		elif guess == "%":
+			if percentage == 1:
+				percentage = 0
+				print("A: " + row[10])
+				print("B: " + row[11])
+				print("C: " + row[12])
+				print("D: " + row[13])
+				print("Question: " + row[0])
+				guess = raw_input("Please type A, B, C, or D now.\n")
+				if guess == row[5]:
+					print "CORRECT!  Congratulations.  Time for the next question..."
+				else:
+					print("WRONG!  Time for your next question...")
+			else:
+				print "You've already used this life-line.  What a waste!"
+		else:
+			print "WRONG!"
+
+
+
+
+#roundfour("Samuel")
 title()
 introduction()
